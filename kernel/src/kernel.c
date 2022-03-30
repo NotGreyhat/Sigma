@@ -31,6 +31,17 @@ void kwrite(const char* str) {
 static void init_subsystems() {
     kwrite("Setting IDT vectors..\n");
     idt_set_vector(0x0, div0_handler);
+    idt_set_vector(0x1, debug_exception);
+    idt_set_vector(0x4, overflow_exception);
+    idt_set_vector(0x5, bre_exception);
+    idt_set_vector(0x6, invalid_opcode_exception);
+    idt_set_vector(0x7, dev_not_avail_exception);
+    idt_set_vector(0x8, double_fault);
+    idt_set_vector(0xA, invalid_tss_exception);
+    idt_set_vector(0xB, snp_exception);
+    idt_set_vector(0xC, stackseg_fault);
+    idt_set_vector(0xD, gpf);
+    idt_set_vector(0xE, page_fault);
     kwrite("Installing IDT..\n");
     idt_install();
     kwrite("Done!\n");
@@ -43,6 +54,6 @@ void _start() {
     }
 
     kwrite("Welcome to SigmaOS!\n");
-    init_subsystems();
+    init_subsystems(); 
     HANG;
 }
