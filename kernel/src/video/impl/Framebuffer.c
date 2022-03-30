@@ -17,3 +17,8 @@ void clear_screen(uint32_t color) {
         }
     }
 }
+
+
+void write_white() {
+    kwrite("\033[41;7;37m");
+}

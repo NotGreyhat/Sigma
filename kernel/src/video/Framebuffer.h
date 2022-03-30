@@ -8,6 +8,6 @@
 void kwrite(const char* str);
 void reset_term();
 void clear_screen(uint32_t color);
-
+void write_white();
 
 #endif
