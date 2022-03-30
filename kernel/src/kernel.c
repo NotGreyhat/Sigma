@@ -42,7 +42,6 @@ void _start() {
         HANG;
     }
 
-    clear_screen(0xFFFFFF);
     kwrite("Welcome to SigmaOS!\n");
     init_subsystems();
     HANG;
