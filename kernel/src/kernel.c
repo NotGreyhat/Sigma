@@ -2,6 +2,7 @@
 #include <util/string.h>
 #include <interrupts/IDT.h>
 #include <interrupts/exceptions.h>
+#include <video/Framebuffer.h>
 
 
 #define HANG \
@@ -16,7 +17,7 @@ static volatile struct limine_terminal_request terminal_request = {
 };
 
 
-static volatile struct limine_framebuffer_request framebuffer_request = {
+volatile struct limine_framebuffer_request framebuffer_request = {
     .id = LIMINE_FRAMEBUFFER_REQUEST,
     .revision = 0
 };
@@ -41,8 +42,8 @@ void _start() {
         HANG;
     }
 
+    clear_screen(0xFFFFFF);
     kwrite("Welcome to SigmaOS!\n");
     init_subsystems();
-    __asm__ __volatile__("int $0x0");
     HANG;
 }
