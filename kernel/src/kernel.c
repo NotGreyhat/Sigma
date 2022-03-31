@@ -4,6 +4,7 @@
 #include <interrupts/exceptions.h>
 #include <video/Framebuffer.h>
 #include <cpu/GDT.h>
+#include <memory/pmm.h>
 
 
 #define HANG \
@@ -47,6 +48,8 @@ static void init_subsystems() {
     idt_install();
     kwrite("Installing GDT..\n");
     load_gdt();
+    kwrite("Setting up physical memory manager..\n");
+    pmm_init();
     kwrite("Done!\n");
 }
 
@@ -57,6 +60,6 @@ void _start() {
     }
 
     kwrite("Welcome to SigmaOS!\n");
-    init_subsystems(); 
+    init_subsystems();
     HANG;
 }
