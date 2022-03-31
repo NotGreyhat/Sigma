@@ -6,7 +6,7 @@ all-hdd: SigmaoOS.hdd
 
 .PHONY: run
 run: SigmaoOS.iso
-	qemu-system-x86_64 -M q35 -m 2G -cdrom SigmaoOS.iso -boot d
+	qemu-system-x86_64 -M q35 -m 2G -cdrom SigmaoOS.iso -boot d -monitor stdio
 
 .PHONY: runfs
 runfs: SigmaoOS.iso
