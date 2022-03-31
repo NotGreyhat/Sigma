@@ -3,6 +3,7 @@
 #include <interrupts/IDT.h>
 #include <interrupts/exceptions.h>
 #include <video/Framebuffer.h>
+#include <cpu/GDT.h>
 
 
 #define HANG \
@@ -44,6 +45,8 @@ static void init_subsystems() {
     idt_set_vector(0xE, page_fault);
     kwrite("Installing IDT..\n");
     idt_install();
+    kwrite("Installing GDT..\n");
+    load_gdt();
     kwrite("Done!\n");
 }
 
