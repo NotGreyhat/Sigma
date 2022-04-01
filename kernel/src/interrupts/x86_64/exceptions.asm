@@ -85,7 +85,7 @@ debug_exception:
 overflow_exception:
     panic 0x4
 
-bre_exception
+bre_exception:
     panic 0x5
 
 invalid_opcode_exception:
