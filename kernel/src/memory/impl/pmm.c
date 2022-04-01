@@ -44,9 +44,25 @@ void pmm_init() {
 }
 
 
-void* kmalloc(size_t size) {
+void* kmalloc(size_t size, uint8_t align) {
     if (!(init)) return NULL;
-    if (placement_addr + size > placement_addr + memlimit || mem == 0) return NULL;
+    if (mem <= 0) {
+        if (mem < 0) {
+            mem = 0;
+        }
+
+        return NULL;
+    }
+
+    uint64_t tmp = (uint64_t)placement_addr;
+
+    if (align && tmp & 0xFFFFF000) {     // If placement address is not aligned.
+        // Align it.
+        tmp &= 0xFFFFF000;
+        tmp += 0x1000;
+        placement_addr = (void*)tmp;
+    }
+
     mem -= size;
 
     void* ret_addr = placement_addr;
